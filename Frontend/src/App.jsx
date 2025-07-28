@@ -3,7 +3,7 @@ import Home from '../src/home/Home'
 import Course from './components/Store'
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import StoreArea from './components/Store/StoreArea'
-
+import Signup from './components/Signup'
 export default function App() {
   return (
     
@@ -11,6 +11,7 @@ export default function App() {
         <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/store" element={<StoreArea />} />
+        <Route path="/signup" element={<Signup/>}/>
       </Routes>
       </div>
     
