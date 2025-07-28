@@ -25,7 +25,7 @@ const Banner = () => {
       <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
     </g>
   </svg>
-  <input type="email" placeholder="Enter your Email here.." required />
+  <input type="email" className='dark:text-black' placeholder="Enter your Email here.." required />
 </label>
 <div className="validator-hint hidden">Enter valid email address</div>
         </div>
@@ -37,7 +37,7 @@ const Banner = () => {
 
         {/* Right part */}
         <div className='order-1 md:order-2 w-full  h-60 md:py-15 md:h-5 md:w-1/2 content-center justify-center items-center '>
-        <img src={banner} className='h-95  py-13 w-full md:ml-20 md:w-full md:h-140 md:mt-0' alt="" />
+        <img src={banner} className='h-95  py-13 w-full md:ml-20 md:w-full md:h-140 md:mt-0 ' alt="" />
         </div>
     </div>
     </>

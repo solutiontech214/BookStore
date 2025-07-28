@@ -3,7 +3,8 @@ import React from 'react'
 const Footer = () => {
   return (
     <>
-    <footer className="footer footer-horizontal footer-center bg-base-200 text-base-content rounded p-10 bottom-0 RELATIVE">
+    <div className=''>
+    <footer className="footer footer-horizontal footer-center dark:text-white dark:bg-gray-800 bg-base-200 text-base-content rounded p-10 bottom-0 RELATIVE">
   <nav className="grid grid-flow-col gap-4">
     <a className="link link-hover">About us</a>
     <a className="link link-hover">Contact</a>
@@ -50,6 +51,7 @@ const Footer = () => {
     <p>Copyright © {new Date().getFullYear()} - All right reserved by NBS Solution Tech Ltd</p>
   </aside>
 </footer>
+</div>
     </>
   )
 }
