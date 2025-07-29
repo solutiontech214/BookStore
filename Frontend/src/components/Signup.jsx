@@ -1,34 +1,86 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Login from './Login'
+import { useForm } from 'react-hook-form'
 
 const Signup = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
+
+  const onSubmit = (data) => console.log(data)
+
   return (
     <>
-    <div className='flex h-screen justify-center content-center items-center bg-gray-200 dark:bg-black'>
-      <div  className="">
-  <div className="  dark:text-white border-1  rounded-2xl shadow-2xl dark:bg-gray-700 p-5">
-    <form method="dialog">
-      {/* if there is a button in form, it will close the modal */}
-     <Link to='/' > <button  className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 p-5 m-5 hover:scale-125  bg-amber-400 text-xl" >✕</button></Link>
-    </form>
-    <h3 className="font-bold text-lg mb-3">Let's Create Ur Account</h3>
-   <div>
-    <span>Name</span> <br />
-    <input type="text" placeholder='Enter your Name.' className='p-2 ml-2 mb-5 mt-3 left-10 border-1 rounded' /> <br />
-    <span>Passcode </span> <br />
-    <input type="passward" placeholder='Enter your password.' className='p-2 ml-2  mt-3 left-10 border-1 rounded' />
-    <br />
-    <div className='grid grid-cols-2 felx justify-center items-center content-center'>
-          <button className=' mt-10  bg-amber-400 px-3 py-2 rounded mr-2'>Create</button>
-          <h2 className='mt-8 text-sm'>Already Have Account? <button onClick={()=>document.getElementById('my_modal_3').showModal()} className='text-blue-400 underline cursor-pointer'>Login</button>  <Login /></h2>
-        
+      <div className='flex h-screen justify-center items-center bg-gray-200 text-black dark:bg-black '>
+        <div className=" border rounded-2xl shadow-2xl  p-8 w-full max-w-md relative dark:bg-gray-100 ">
+          
+          {/* Close Button */}
+          <Link to='/'>
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 hover:scale-125 bg-amber-400 text-xl">✕</button>
+          </Link>
 
-    </div>
-   </div>
-  </div>
-</div>
-    </div>
+          {/* Heading */}
+          <h3 className="font-bold text-lg mb-5 text-center">Let's Create Your Account</h3>
+
+          {/* Signup Form */}
+          <form onSubmit={handleSubmit(onSubmit)}>
+
+            {/* Name Field */}
+            <label className='block mb-1'>Name</label>
+            <input
+              type="text"
+              placeholder='Enter your Name.'
+              className='w-full p-2 mb-1 border rounded text-black'
+              {...register("name", { required: "Name is required" })}
+            />
+            {errors.name && <p className='text-red-600 text-sm mb-4'>{errors.name.message}</p>}
+
+            {/* Email Field */}
+            <label className='block mb-1'>Email</label>
+            <input
+              type="text"
+              placeholder='Enter your Email.'
+              className='w-full p-2 mb-1 border rounded text-black'
+              {...register("email", { required: "Email is required" })}
+            />
+            {errors.email && <p className='text-red-600 text-sm mb-4'>{errors.email.message}</p>}
+
+            {/* Password Field */}
+            <label className='block mb-1'>Passcode</label>
+            <input
+              type="password"
+              placeholder='Enter your password.'
+              className='w-full p-2 mb-1 border rounded text-black'
+              {...register("password", { required: "Password is required" })}
+            />
+            {errors.password && <p className='text-red-600 text-sm mb-6'>{errors.password.message}</p>}
+
+            {/* Submit + Login */}
+            <div className='flex justify-between items-center mt-6'>
+              <button type="submit" className='bg-amber-400 px-4 py-2 rounded text-black font-semibold hover:scale-105'>
+                Create
+              </button>
+
+              <div className='text-sm text-black '>
+                Already have an account?
+                <button
+                  type="button"
+                  onClick={() => document.getElementById('my_modal_3').showModal()}
+                  className='text-blue-400 underline ml-1'
+                >
+                  Login
+                </button>
+              </div>
+            </div>
+          </form>
+
+          {/* Login Modal */}
+          <Login />
+        </div>
+      </div>
     </>
   )
 }

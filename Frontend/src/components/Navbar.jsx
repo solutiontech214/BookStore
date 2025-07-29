@@ -51,7 +51,7 @@ const handleScroll = () => {
   return (
     <>
       <div className={`max-w-screen-2xl container mx-auto md:px-20 px-5 fixed top-0 left-0 right-0 
-        ${sticky?"sticky-navbar shadow-lg bg-orange-200 dark:bg-gray-700 ease-in-out transition-all duration-500 z-50":""}`}>
+        ${sticky?"sticky-navbar shadow-lg bg-orange-200 dark:bg-gray-700 ease-in-out transition-all duration-500 z-50":""} ${sticky ? "shadow-lg" : ""}`}>
         <div className="navbar  ">
           {" "}
           {/*shadow-sm*/}

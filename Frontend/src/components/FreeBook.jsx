@@ -1,14 +1,14 @@
 import React from "react";
 import Slider from "react-slick";
-
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import list from '../list.json'
+import list from "../list.json";
 import Cards from "./Cards";
+
 function FreeBook() {
   const freebook = list.filter((data) => data.category === "free");
 
-  var settings = {
+  const settings = {
     dots: true,
     infinite: false,
     speed: 800,
@@ -22,8 +22,8 @@ function FreeBook() {
           slidesToShow: 3,
           slidesToScroll: 3,
           infinite: true,
-          dots: true
-        }
+          dots: true,
+        },
       },
       {
         breakpoint: 600,
@@ -31,39 +31,39 @@ function FreeBook() {
           slidesToShow: 2,
           slidesToScroll: 2,
           initialSlide: 2,
-          dots:false
-        }
+          dots: false,
+        },
       },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          dots:false
-        }
-      }
-    ]
+          dots: false,
+        },
+      },
+    ],
   };
+
   return (
-    <>
-      <div className="max-w-screen-2xl mb-10  container mx-auto md:px-20 px-5">
-        <div>
-             <h1 className="text-xl font-semibold pb-2 ">Free Books</h1>
-        <p className="mb-10">Unlock worlds of wonder and imagination—find your perfect read at our bookstore today!</p>
-       
-       
+    <div className="max-w-screen-2xl mb-10 mt-10 mx-auto px-5 md:px-20">
+      <div className="">
+        <h1 className="text-xl font-semibold pb-2">Free Books</h1>
+        <p className="mb-10 ml-0">
+          Unlock worlds of wonder and imagination—find your perfect read at our bookstore today!
+        </p>
       </div>
-      <div className="slider-container max-h-max ">
-        <Slider {...settings}>
-        {
-            freebook.map((items,idx) => (
-  <Cards key={items.id} item={items}  />
-))
-        }
-      </Slider>
+
+      <div className="slider-container flex justify-center">
+        <div className="w-full md:w-[90%]">
+          <Slider {...settings}>
+            {freebook.map((items) => (
+              <Cards key={items.id} item={items} />
+            ))}
+          </Slider>
+        </div>
+      </div>
     </div>
-      </div>
-    </>
   );
 }
 

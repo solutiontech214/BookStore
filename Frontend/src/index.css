@@ -1,3 +1,13 @@
 @import "tailwindcss";
 @plugin "daisyui";
 @custom-variant dark (&:where(.dark, .dark *));
+/* slider.css */
+.slick-prev:before,
+.slick-next:before {
+  color: black !important;
+}
+
+[data-theme='dark'] .slick-prev:before,
+[data-theme='dark'] .slick-next:before {
+  color: white !important;
+}
