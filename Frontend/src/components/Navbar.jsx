@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../index.css";
 import Login from "./Login";
+import { Link } from "react-router-dom";
 function Navbar() {
   const [theme,setTheme]=useState(localStorage.getItem("theme")?localStorage.getItem("theme"):"light")
   const element=document.documentElement;
@@ -38,7 +39,7 @@ const handleScroll = () => {
         <a href="/">Home</a>
       </li>
       <li>
-        <a href="/store">Store</a>
+        <Link to="/store">Store</Link>
       </li>
       <li>
         <a href="/about">About</a>
