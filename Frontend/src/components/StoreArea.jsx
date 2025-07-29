@@ -1,7 +1,7 @@
 import React from 'react'
-import Navbar from '../Navbar'
-import Store from '../Store'
-import Footer from '../Footer'
+import Navbar from './Navbar'
+import Store from './Store'
+import Footer from './Footer'
 
 const StoreArea = () => {
   return (

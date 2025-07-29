@@ -2,7 +2,7 @@ import React from 'react'
 import Home from '../src/home/Home'
 import Course from './components/Store'
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
-import StoreArea from './components/Store/StoreArea'
+import StoreArea from './components/StoreArea'
 import Signup from './components/Signup'
 export default function App() {
   return (
