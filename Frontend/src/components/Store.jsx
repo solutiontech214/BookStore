@@ -7,7 +7,7 @@ const Store = () => {
     <>
       <div className='w-full max-w-screen-2xl mx-auto md:px-20 px-5 mr-30  '>
         {/* Welcome message */}
-        <div className='mt-20 flex flex-col items-center justify-center text-center space-y-4 mr-10'>
+        <div className='mt-20 flex flex-col items-center justify-center text-center space-y-4 mr-10 ml-[-10px] w-full'>
           <h1 className='text-4xl font-semibold'>
             Welcome back! Your next favorite story is <span className='text-orange-300'>Just a Page Away.</span>
           </h1>
@@ -17,10 +17,10 @@ const Store = () => {
         </div>
 
         {/* Card Grid */}
-        <div className='mt-10 grid grid-cols-1 md:grid-cols-3 gap-8 w-full ml-[-20px]'>
+        <div className='mt-10 grid grid-cols-1 md:grid-cols-3 gap-8 w-full ml-[-20px] max-w-full'>
           {
             list.map((items) => (
-              <Cards item={items} id={items.id} key={items.id} className="sm:mr-20"/>
+              <Cards item={items} id={items.id} key={items.id} className="sm:mr-20 max-w-full"/>
             ))
           }
         </div>
