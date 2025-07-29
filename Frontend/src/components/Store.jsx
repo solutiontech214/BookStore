@@ -7,7 +7,7 @@ const Store = () => {
     <>
       <div className='w-full max-w-screen-2xl mx-auto md:px-20 px-5'>
         {/* Welcome message */}
-        <div className='mt-10 flex flex-col items-center justify-center text-center space-y-4'>
+        <div className='mt-20 flex flex-col items-center justify-center text-center space-y-4'>
           <h1 className='text-4xl font-semibold'>
             Welcome back! Your next favorite story is <span className='text-orange-300'>Just a Page Away.</span>
           </h1>
