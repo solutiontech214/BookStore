@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Login from './Login'
 import { useForm } from 'react-hook-form'
-
+import axios from 'axios'
 const Signup = () => {
   const {
     register,
@@ -10,7 +10,27 @@ const Signup = () => {
     formState: { errors },
   } = useForm()
 
-  const onSubmit = (data) => console.log(data)
+  const onSubmit =async (data) => {
+    const user={
+     fullname:data.fullname,
+     email:data.email,
+     passcode:data.passcode
+    }
+
+   await axios.post("http://localhost:3001/user/signup",user).then((res)=>{
+      console.log(res.data)
+      if(res.data){
+        alert("Signup Successfull")
+      }
+      localStorage.setItem("user",JSON.stringify(res.data))
+    }).catch((err) => {
+      if(err.response)
+      {
+alert("Signup Error :"+err.response.data.message )
+      }
+      
+    })
+  }
 
   return (
     <>
@@ -34,9 +54,9 @@ const Signup = () => {
               type="text"
               placeholder='Enter your Name.'
               className='w-full p-2 mb-1 border rounded text-black'
-              {...register("name", { required: "Name is required" })}
+              {...register("fullname", { required: "Name is required" })}
             />
-            {errors.name && <p className='text-red-600 text-sm mb-4'>{errors.name.message}</p>}
+            {errors.fullname && <p className='text-red-600 text-sm mb-4'>{errors.name.message}</p>}
 
             {/* Email Field */}
             <label className='block mb-1'>Email</label>
@@ -54,9 +74,9 @@ const Signup = () => {
               type="password"
               placeholder='Enter your password.'
               className='w-full p-2 mb-1 border rounded text-black'
-              {...register("password", { required: "Password is required" })}
+              {...register("passcode", { required: "Password is required" })}
             />
-            {errors.password && <p className='text-red-600 text-sm mb-6'>{errors.password.message}</p>}
+            {errors.passcode && <p className='text-red-600 text-sm mb-6'>{errors.password.message}</p>}
 
             {/* Submit + Login */}
             <div className='flex justify-between items-center mt-6'>
