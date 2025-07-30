@@ -1,8 +1,24 @@
 import express from 'express'
 import dotenv from 'dotenv'
-const app=express();
-
+import mongoose from 'mongoose';
+import bookRoute from './Routes/book.route.js'
+import cors from 'cors'
 dotenv.config()
+const app=express();
+const dbUri=process.env.MONGO_DB_URI
+try{
+mongoose.connect(dbUri)
+
+}
+catch(error){
+    console.log("Connection error")
+}
+mongoose.connection.on("connected",()=>{
+    console.log("db connected")
+})
+app.use(cors())
+app.use('/book',bookRoute)
+
 app.get('/',(req,res)=>{
     if(req.url==='/')
 res.send("Hello World")

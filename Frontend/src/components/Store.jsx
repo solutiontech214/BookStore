@@ -1,11 +1,26 @@
-import React from 'react'
-import list from '../list.json'
+import React, { useEffect, useState } from 'react'
 import Cards from '../components/Cards'
+import axios from 'axios'
 
 const Store = () => {
+  const [book, setBook] = useState([])
+
+  useEffect(() => {
+    const getBook = async () => {
+      try {
+        const data = await axios.get('http://localhost:3001/book')
+        console.log(data.data)
+        setBook(data.data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getBook()
+  }, [])
+
   return (
     <>
-      <div className='w-full max-w-screen-2xl mx-auto md:px-20 px-5 mr-30  '>
+      <div className='w-full max-w-screen-2xl mx-auto md:px-20 px-5 mr-30'>
         {/* Welcome message */}
         <div className='mt-20 flex flex-col items-center justify-center text-center space-y-4 mr-10 ml-[-10px] w-full'>
           <h1 className='text-4xl font-semibold'>
@@ -19,8 +34,8 @@ const Store = () => {
         {/* Card Grid */}
         <div className='mt-10 grid grid-cols-1 md:grid-cols-3 gap-8 w-full ml-[-20px] max-w-full'>
           {
-            list.map((items) => (
-              <Cards item={items} id={items.id} key={items.id} className="sm:mr-20 max-w-full"/>
+            book.map((items) => (
+              <Cards item={items} id={items.id} key={items.id} className="sm:mr-20 max-w-full" />
             ))
           }
         </div>

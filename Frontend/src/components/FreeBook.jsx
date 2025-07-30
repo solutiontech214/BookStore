@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import list from "../list.json";
 import Cards from "./Cards";
+import axios from "axios";
 
 function FreeBook() {
-  const freebook = list.filter((data) => data.category === "free");
+  const [book, setBook] = useState([]);
+
+  useEffect(() => {
+    const getBook = async () => {
+      try {
+        const data = await axios.get("http://localhost:3001/book");
+        console.log(data.data);
+        setBook(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getBook();
+  }, []);
+
+  const freebook = book.filter((book) => book.category === "free");
 
   const settings = {
     dots: true,
@@ -47,7 +62,7 @@ function FreeBook() {
 
   return (
     <div className="max-w-screen-2xl mb-10 mt-10 mx-auto px-5 md:px-20">
-      <div className="">
+      <div>
         <h1 className="text-xl font-semibold pb-2">Free Books</h1>
         <p className="mb-10 ml-0">
           Unlock worlds of wonder and imagination—find your perfect read at our bookstore today!
