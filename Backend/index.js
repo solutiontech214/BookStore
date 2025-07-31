@@ -15,7 +15,11 @@ async function startServer() {
     await mongoose.connect(dbUri);
     console.log("db connected");
     app.use(express.json());
-    app.use(cors());
+   app.use(cors({
+  origin: "https://book-store-5jxk.vercel.app", // your frontend domain
+  methods: ["GET", "POST", "PUT", "DELETE"], // optional
+  credentials: true // optional
+}));
     app.use('/book', bookRoute);
     app.use('/user', userRoute);
     app.get('/', (req, res) => {
