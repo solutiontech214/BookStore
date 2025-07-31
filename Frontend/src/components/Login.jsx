@@ -18,7 +18,7 @@ const Login = () => {
     }
 
     try {
-      const res = await axios.post("http://localhost:3001/user/login", user);
+      const res = await axios.post("https://your-backend-api.vercel.app/user/login", user);
       console.log(res.data);
       if (res.data) {
         toast.success("Login Successful");
