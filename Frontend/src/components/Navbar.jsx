@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "../index.css";
 import Login from "./Login";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import {useAuth} from '../context/AuthProvider'
+import Logout from "./Logout";
+import toast from "react-hot-toast";
 function Navbar() {
+  const [authUser, setAuthUSer] = useAuth();
+  const navigate = useNavigate();
   const [theme,setTheme]=useState(localStorage.getItem("theme")?localStorage.getItem("theme"):"light")
   const element=document.documentElement;
   useEffect(()=>{
@@ -39,7 +44,19 @@ const handleScroll = () => {
         <a href="/">Home</a>
       </li>
       <li>
-        <Link to="/store">Store</Link>
+        <a
+          href="#"
+          onClick={e => {
+            e.preventDefault();
+            if (authUser) {
+              navigate("/store");
+            } else {
+              toast.error("Please Login First");
+            }
+          }}
+        >
+          Store
+        </a>
       </li>
       <li>
         <a href="/about">About</a>
@@ -51,7 +68,7 @@ const handleScroll = () => {
   );
   return (
     <>
-      <div className={`max-w-screen-2xl container mx-auto md:px-20 px-5 fixed top-0 left-0 right-0 
+      <div className={`max-w-screen-2xl container mx-auto md:px-20 px-5 fixed top-0 left-0 right-0  h:10 md:h-18 
         ${sticky?"sticky-navbar shadow-lg bg-orange-200 dark:bg-gray-700 ease-in-out transition-all duration-500 z-50":""} ${sticky ? "shadow-lg" : ""}`}>
         <div className="navbar  ">
           {" "}
@@ -86,7 +103,7 @@ const handleScroll = () => {
                 {navItems}
               </ul>
             </div>
-            <a className=" text-2xl cursor-pointer font-bold">The NextPage</a>
+            <a className="text-xl md:text-2xl cursor-pointer font-bold">The NextPage</a>
           </div>
           {/*Nav Items */}
           <div className="navbar-end">
@@ -151,9 +168,9 @@ const handleScroll = () => {
               </label>
             </div>
             <div>
-              <a className="btn  text-black py-2 hover:bg-black hover:text-white duration-300 bg-orange-300 cursor-pointer" onClick={()=>document.getElementById('my_modal_3').showModal()}>
+             {authUser?<Logout />:<a className="btn  text-black py-2 hover:bg-black hover:text-white duration-300 bg-orange-300 cursor-pointer" onClick={()=>document.getElementById('my_modal_3').showModal()}>
                 Login
-              </a>
+              </a>} 
               <Login/>
             </div>
           </div>

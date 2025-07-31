@@ -24,7 +24,10 @@ const Login = () => {
         toast.success("Login Successful");
         localStorage.setItem("user", JSON.stringify(res.data));
         document.getElementById("my_modal_3").close(); // close the modal after login
-      }
+        setTimeout(()=>{
+           window.location.reload()  
+        },2000)
+     }
     } catch (err) {
       if (err.response && err.response.data && err.response.data.message) {
         toast.error("Login Error: " + err.response.data.message);
