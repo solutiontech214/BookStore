@@ -16,7 +16,7 @@ async function startServer() {
     console.log("db connected");
     app.use(express.json());
    app.use(cors({
-  origin: "https://book-store-5jxk.vercel.app"
+  origin: "https://localhost:3001"
 }));
     app.use('/book', bookRoute);
     app.use('/user', userRoute);
