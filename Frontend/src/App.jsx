@@ -4,6 +4,7 @@ import Course from './components/Store'
 import { Routes, Route } from 'react-router-dom'
 import StoreArea from './/components/StoreArea'
 import Signup from './components/Signup'
+import {Toaster} from 'react-hot-toast'
 export default function App() {
   return (
     
@@ -13,6 +14,7 @@ export default function App() {
         <Route path="/store" element={<StoreArea />} />
         <Route path="/signup" element={<Signup/>}/>
       </Routes>
+      <Toaster/>
       </div>
     
   )

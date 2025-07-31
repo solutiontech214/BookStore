@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-
+import axios from 'axios'
+import toast from 'react-hot-toast'
 const Login = () => {
   const {
     register,
@@ -9,9 +10,28 @@ const Login = () => {
     formState: { errors },
   } = useForm()
 
-  const onSubmit = (data) => {
-    console.log(data)
-    document.getElementById("my_modal_3").close() // close the modal after login
+  const onSubmit = async(data) => {
+   const user={
+    
+     email:data.email,
+     passcode:data.passcode
+    }
+
+    try {
+      const res = await axios.post("http://localhost:3001/user/login", user);
+      console.log(res.data);
+      if (res.data) {
+        toast.success("Login Successful");
+        localStorage.setItem("user", JSON.stringify(res.data));
+        document.getElementById("my_modal_3").close(); // close the modal after login
+      }
+    } catch (err) {
+      if (err.response && err.response.data && err.response.data.message) {
+        toast.error("Login Error: " + err.response.data.message);
+      } else {
+        toast.error("Login Error: Something went wrong");
+      }
+    }
   }
 
   return (
@@ -47,9 +67,9 @@ const Login = () => {
               type="password"
               placeholder="Enter your password."
               className="w-full p-2 mb-2 border rounded"
-              {...register("password", { required: "Password is required" })}
+              {...register("passcode", { required: "Passcode is required" })}
             />
-            {errors.password && <p className="text-red-600 text-sm mb-3">{errors.password.message}</p>}
+            {errors.passcode && <p className="text-red-600 text-sm mb-3">{errors.passcode.message}</p>}
 
             {/* Submit & Switch to Signup */}
             <div className="flex justify-between items-center mt-6">
