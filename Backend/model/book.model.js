@@ -7,5 +7,5 @@ cover:String,
 price:Number
 
 })
-const BooDataModel =mongoose.model("BookDataModel",BookData)
-export default BooDataModel
+const BookDataModel =mongoose.model("BookDataModel",BookData)
+export default BookDataModel

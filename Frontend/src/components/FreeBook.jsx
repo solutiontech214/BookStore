@@ -5,23 +5,27 @@ import "slick-carousel/slick/slick-theme.css";
 import Cards from "./Cards";
 import axios from "axios";
 
+
 function FreeBook() {
-  const [book, setBook] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    const getBook = async () => {
+    const getBooks = async () => {
       try {
-        const data = await axios.get("http://localhost:3001/book");
-        console.log(data.data);
-        setBook(data.data);
+        const response = await axios.get("http://localhost:3001/book");
+        console.log(response.data);
+        setBooks(response.data);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
-    getBook();
+    getBooks();
   }, []);
 
-  const freebook = book.filter((book) => book.category === "free");
+  const freeBooks = books.filter((book) => book.category === "free");
 
   const settings = {
     dots: true,
@@ -60,6 +64,15 @@ function FreeBook() {
     ],
   };
 
+  if (loading) {
+    return (
+      <div className="max-w-screen-2xl mb-10 mt-10 mx-auto px-5 md:px-20">
+        <h1 className="text-xl font-semibold pb-2">Free Books</h1>
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-screen-2xl mb-10 mt-10 mx-auto px-5 md:px-20">
       <div>
@@ -72,8 +85,8 @@ function FreeBook() {
       <div className="slider-container flex justify-center">
         <div className="w-full md:w-[90%]">
           <Slider {...settings}>
-            {freebook.map((items) => (
-              <Cards key={items.id} item={items} />
+            {freeBooks.map((items) => (
+              <Cards key={items._id} item={items} />
             ))}
           </Slider>
         </div>
