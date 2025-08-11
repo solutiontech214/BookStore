@@ -13,7 +13,7 @@ function FreeBook() {
   useEffect(() => {
     const getBooks = async () => {
       try {
-        const response = await axios.get("https://localhost:3001/book");
+        const response = await axios.get("http://localhost:3001/book");
         console.log(response.data);
         setBooks(response.data);
       } catch (error) {
